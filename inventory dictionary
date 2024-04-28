@@ -1,0 +1,47 @@
+# inventory dictionary
+inventory = {}
+
+def add_product(item, quantity):
+  """
+  Adds a new item to the inventory dictionary, handling existing items.
+  """
+  if item in inventory:
+    inventory[item] += quantity
+  else:
+    inventory[item] = quantity
+
+def remove_product(item, quantity):
+  """
+  Removes a specified quantity of an item from the inventory,
+  ensuring sufficient stock and handling item removal if empty.
+  """
+  if item in inventory:
+    if inventory[item] >= quantity:
+      inventory[item] -= quantity
+      if inventory[item] == 0:
+        del inventory[item]
+    else:
+      print(f"Not enough {item} in stock.")
+  else:
+    print(f"{item} not found in inventory.")
+
+def total_items():
+  """
+  Prints the items and their quantities in the inventory.
+  """
+  
+  print("Items in Inventory:")
+  for item, quantity in inventory.items():
+    print(f"{item}: {quantity}")
+
+# Add some initial items to the inventory
+add_product("Apples", 10)
+add_product("Bananas", 15)
+add_product("Oranges", 20)
+
+# Remove some items
+remove_product("Bananas", 5)
+remove_product("Grapes", 3)  # Item not found
+
+# Print the current inventory
+total_items()
